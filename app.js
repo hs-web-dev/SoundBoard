@@ -27,3 +27,23 @@ function addToLibrary(audioUrl) {
   library.push(sound);
   displayLibrary();
 }
+
+function displayLibrary() {
+  const container = document.getElementById("library");
+  container.innerHTML = "";
+
+  library.forEach(sound => {
+    const div = document.createElement("div");
+    div.className = "library-item";
+    div.innerHTML = `
+      <button onclick="playSound('${sound.url}')">▶️ Play</button>
+      <button onclick="addToSoundboard('${sound.id}')">➕ Add to Soundboard</button>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function playSound(url) {
+  const audio = new Audio(url);
+  audio.play();
+}
