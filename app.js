@@ -1,21 +1,13 @@
-function importAudio() {}
-function addToSoundboard(id) {}
-function removeFromSoundboard(id) {}
-function playSound(id) {}
+// ----------------------
+// CONFIG
+// ----------------------
+const BACKEND_URL = "https://soundboard-backend-phi.vercel.app"; 
+// ⚠️ Mets ici ton URL Vercel
 
-async function importAudioFromYoutube(url) {
-  const response = await fetch("https://soundboard-backend-phi.vercel.app", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ url })
-  });
 
-  const blob = await response.blob(); // le MP3 reçu
-  const audioUrl = URL.createObjectURL(blob); // URL locale utilisable
-
-  addToLibrary(audioUrl); // tu vas créer cette fonction
-}
-
+// ----------------------
+// LIBRARY
+// ----------------------
 let library = [];
 
 function addToLibrary(audioUrl) {
@@ -35,19 +27,20 @@ function displayLibrary() {
   library.forEach(sound => {
     const div = document.createElement("div");
     div.className = "library-item";
+
     div.innerHTML = `
       <button onclick="playSound('${sound.url}')">▶️ Play</button>
       <button onclick="addToSoundboard('${sound.id}')">➕ Add to Soundboard</button>
     `;
+
     container.appendChild(div);
   });
 }
 
-function playSound(url) {
-  const audio = new Audio(url);
-  audio.play();
-}
 
+// ----------------------
+// SOUNDBOARD
+// ----------------------
 let soundboard = [];
 
 function addToSoundboard(id) {
@@ -68,3 +61,42 @@ function displaySoundboard() {
     container.appendChild(btn);
   });
 }
+
+
+// ----------------------
+// AUDIO PLAYER
+// ----------------------
+function playSound(url) {
+  const audio = new Audio(url);
+  audio.play();
+}
+
+
+// ----------------------
+// IMPORT YOUTUBE
+// ----------------------
+async function importAudioFromYoutube(url) {
+  const response = await fetch(BACKEND_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url })
+  });
+
+  const blob = await response.blob();
+  const audioUrl = URL.createObjectURL(blob);
+
+  addToLibrary(audioUrl);
+}
+
+
+// ----------------------
+// EVENT LISTENER
+// ----------------------
+document.getElementById("import-btn").addEventListener("click", () => {
+  const url = document.getElementById("youtube-url").value.trim();
+  if (url.length < 5) {
+    alert("Entre un lien YouTube valide");
+    return;
+  }
+  importAudioFromYoutube(url);
+});
