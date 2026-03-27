@@ -15,3 +15,15 @@ async function importAudioFromYoutube(url) {
 
   addToLibrary(audioUrl); // tu vas créer cette fonction
 }
+
+let library = [];
+
+function addToLibrary(audioUrl) {
+  const sound = {
+    id: Date.now(),
+    url: audioUrl
+  };
+
+  library.push(sound);
+  displayLibrary();
+}
