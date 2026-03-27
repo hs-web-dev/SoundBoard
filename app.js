@@ -47,3 +47,24 @@ function playSound(url) {
   const audio = new Audio(url);
   audio.play();
 }
+
+let soundboard = [];
+
+function addToSoundboard(id) {
+  const sound = library.find(s => s.id == id);
+  soundboard.push(sound);
+  displaySoundboard();
+}
+
+function displaySoundboard() {
+  const container = document.getElementById("soundboard");
+  container.innerHTML = "";
+
+  soundboard.forEach(sound => {
+    const btn = document.createElement("div");
+    btn.className = "sound-button";
+    btn.innerText = "Sound";
+    btn.onclick = () => playSound(sound.url);
+    container.appendChild(btn);
+  });
+}
