@@ -1,7 +1,7 @@
 // ----------------------
 // CONFIG
 // ----------------------
-const BACKEND_URL = "https://soundboard-backend-phi.vercel.app/extract"; 
+const BACKEND_URL = "https://soundboard-backend-v2.vercel.app/api/extract";
 // ⚠️ Mets ici ton URL Vercel
 
 
