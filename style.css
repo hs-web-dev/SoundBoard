@@ -1,15 +1,69 @@
+body {
+  background: #111;
+  color: white;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+#import-section {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#youtube-url {
+  width: 300px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+#import-btn {
+  padding: 10px 20px;
+  background: #4CAF50;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#library {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.library-item {
+  background: #222;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.library-item button {
+  margin-right: 10px;
+}
+
 #soundboard {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 15px;
 }
 
 .sound-button {
   background: #333;
-  color: white;
-  padding: 20px;
+  padding: 30px;
   border-radius: 10px;
   text-align: center;
   cursor: pointer;
+  font-size: 18px;
+  transition: 0.2s;
 }
 
+.sound-button:hover {
+  background: #555;
+}
